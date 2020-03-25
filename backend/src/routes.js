@@ -1,16 +1,17 @@
 const express = require("express");
-const crypto = require("crypto");
+const OngController = require("./controllers/OngController");
+const IncidentController = require("./controllers/IncidentController");
+const ProfileController = require("./controllers/ProfileController");
 
 const routes = express.Router();
 
-routes.post("/ongs", (request, response) => {
-  const { name, email, whatsapp, city } = request.body;
+routes.get("/ongs", OngController.index);
+routes.post("/ongs", OngController.create);
 
-  const id = crypto.randomBytes(4).toString("HEX");
+routes.get("/profile", ProfileController.index);
 
-  return response.json({
-    aluno: "Yure Araujo"
-  });
-});
+routes.post("/incidents", IncidentController.create);
+routes.get("/incidents", IncidentController.index);
+routes.delete("/incidents/:id", IncidentController.delete);
 
 module.exports = routes;
